@@ -1,0 +1,29 @@
+---
+title: "Julie Theme For Multiple Plots"
+author: "E. Kovacs"
+date: "16 July 2019"
+output: html_document
+---
+```{r}
+## This code produce one figure (MCMC_ModelV5.png) putting together p1, p2 and p3 (each of them composed of 2 graphics) without the legend. To have a unique common legend to all the graph I use “get_legend” and add it below. I also add common x and y axis 
+
+library(cowplot)
+p_MCMC <- plot_grid(p1 + theme(legend.position = "none"),p2 + theme(legend.position = "none"),p3 + theme(legend.position = "none"), p4 + theme(legend.position = "none"), align = 'vh', hjust = -1, nrow = 4)
+
+legend_b <- get_legend(p2 + theme(legend.position="bottom"))
+
+#create common x and y labels
+
+y.grob <- textGrob("Parameter estimates", 
+                   gp=gpar(fontsize=15), rot=90)
+
+x.grob <- textGrob("MCMC Iterations", 
+                   gp=gpar(fontsize=15))
+
+p <- plot_grid(grid.arrange(arrangeGrob(p_MCMC, left = y.grob, bottom = x.grob)), legend_b, ncol = 1, rel_heights = c(1, .2))
+#ggsave(plot = p,width=8, height=10, file = "C:\\Users\\vercello\\Dropbox\\GCI\\Catlin\\Research projects\\Transitions\\PROJECT_CORAIL\\figures\\MCMC_ModelV5.png")
+
+```
+
+# The code above produces something like this:
+

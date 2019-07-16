@@ -1,0 +1,32 @@
+---
+title: "Julie Multiple Plots"
+author: "E. Kovacs"
+date: "16 July 2019"
+output: html_document
+---
+# Cowplot for mulitple plots
+
+```{r multiple ggplots via group_by}
+
+pbar1<-gather.prop%>%
+  group_by(Type)%>% 
+  do(plots=ggplot(data=.) +
+       geom_bar(data=.,aes(x=Site,y=Mean_prop*100,fill = Aggregation),stat = "identity",alpha = 0.7,col = "black") +
+       ylab("Proportion (in %)") +
+       theme(axis.text.x = element_text(size=11,hjust=1,angle=45),legend.position="right",
+             legend.title = element_blank(),legend.text = element_text(colour = "black", size = 13),
+             panel.grid.minor = element_blank(),plot.title = element_text(hjust=0,vjust=2,size=18, face="bold"),
+             axis.text.y = element_text(size=13),axis.title.y=element_text(size=15),axis.title.x=element_text(size=15),
+             strip.text=element_text(size=14),strip.background = element_rect(fill="gray98"))) +
+  ggtitle(unique(.$Type))
+
+# ggsave(plot = pbar$plots[[1]], file = "C:\\Users\\vercello\\Dropbox\\Collaborations\\Chris\\FREA\\paper\\Results\\Plot_per_site_ALL_Types\\Proportion_substrate.pdf",width = 6, height = 6)
+ggsave(plot = pbar$plots[[2]], file = "C:\\Users\\vercello\\Dropbox\\Collaborations\\Chris\\FREA\\paper\\Results\\Plot_per_site_ALL_Types\\Proportion_Fish.pdf",width = 6, height = 6)
+ggsave(plot = pbar$plots[[3]], file = "C:\\Users\\vercello\\Dropbox\\Collaborations\\Chris\\FREA\\paper\\Results\\Plot_per_site_ALL_Types\\Proportion_Fish_no_butterfly.pdf",width = 6, height = 6)
+ggsave(plot = pbar$plots[[4]], file = "C:\\Users\\vercello\\Dropbox\\Collaborations\\Chris\\FREA\\paper\\Results\\Plot_per_site_ALL_Types\\Proportion_Impact_raw.pdf",width = 6, height = 6)
+ggsave(plot = pbar$plots[[5]], file = "C:\\Users\\vercello\\Dropbox\\Collaborations\\Chris\\FREA\\paper\\Results\\Plot_per_site_ALL_Types\\Proportion_Impacts_normalized.pdf",width = 6, height = 6)
+ggsave(plot = pbar$plots[[6]], file = "C:\\Users\\vercello\\Dropbox\\Collaborations\\Chris\\FREA\\paper\\Results\\Plot_per_site_ALL_Types\\Proportion_Invert.pdf",width = 6, height = 6)
+
+
+```
+
