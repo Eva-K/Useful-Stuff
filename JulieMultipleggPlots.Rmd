@@ -4,6 +4,7 @@ author: "E. Kovacs"
 date: "16 July 2019"
 output: html_document
 ---
+
 # Load necessary packages
 
 ```{r what you need}
@@ -31,11 +32,26 @@ library(cowplot)
 
 ```
 
-# Cowplot for mulitple plots
+# Code for mulitple plots on one page
+
+
+```{r cowplot changes}
+
+#********************************************************
+#Note: As of version 1.0.0, cowplot does not change the
+#  default ggplot2 theme anymore. To recover the previous
+#  behavior, execute:
+#  theme_set(theme_cowplot())
+#********************************************************
+
+```
+
 
 ```{r multiple ggplots via group_by}
 
-pbar1<-gather.prop%>%
+# gather
+
+pbar1 <- gather.prop%>%
   group_by(Type)%>% 
   do(plots=ggplot(data=.) +
        geom_bar(data=.,aes(x=Site,y=Mean_prop*100,fill = Aggregation),stat = "identity",alpha = 0.7,col = "black") +
