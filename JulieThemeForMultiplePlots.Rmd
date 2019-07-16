@@ -4,6 +4,35 @@ author: "E. Kovacs"
 date: "16 July 2019"
 output: html_document
 ---
+# Load necessary packages
+
+```{r what you need}
+
+install.packages("tidyverse")
+install.packages("janitor")
+install.packages("skimr")
+install.packages("stringr")
+install.packages("data.table")
+install.packages("ggthemes")
+install.packages("RColorBrewer")
+install.packages("gmodels")
+install.packages("cowplot")
+
+
+library(tidyverse) # use install.packages("tidyverse") if receive an error message
+library(janitor) # use install.packages("janitor") if receive an error message
+library(skimr)  # use install.packages("skimr") if receive an error message
+library(stringr) # use install.packages("stringr") if receive an error message
+library(data.table)
+library(ggthemes)
+library(RColorBrewer)
+library(gmodels)
+library(cowplot)
+
+```
+
+# Code for generating a single title/legend etc for a multiplot panel
+
 ```{r}
 ## This code produce one figure (MCMC_ModelV5.png) putting together p1, p2 and p3 (each of them composed of 2 graphics) without the legend. To have a unique common legend to all the graph I use “get_legend” and add it below. I also add common x and y axis 
 
